@@ -9,3 +9,8 @@ CREATE TABLE WEB_URL(ID INT PRIMARY KEY   AUTOINCREMENT,  URL  TEXT    NOT NULL 
 ### To run server
 
 <code>python main.py</code>
+
+
+
+
+Thansk to @naren arya
