@@ -1,13 +1,11 @@
-# python-short-url
+### python-short-url
 
-1. pip install flask
+<code>pip install flask</code>
 
-
-sqlite3 urls.db
+<code>sqlite3 urls.db</code>
 
 CREATE TABLE WEB_URL(ID INT PRIMARY KEY   AUTOINCREMENT,  URL  TEXT    NOT NULL );
 
+### To run server
 
-To run server
-
- python main.py
+<code>python main.py</code>
