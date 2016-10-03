@@ -15,17 +15,22 @@ CREATE TABLE WEB_URL(ID INT PRIMARY KEY   AUTOINCREMENT,  URL  TEXT    NOT NULL 
 
 <code>
 Method == 'POST'
+</code>
+<code>
 Heaader = {
    'Content-Type':'application/json'
 }
+</code>
+<code>
 url = 'https://python-short-url.herokuapp.com/v1/url/short'
-
+</code>
+<code>
 data = {
       'url':'http://www.cricbuzz.com/live-cricket-scores/16823/ind-vs-nz-2nd-test-new-zealand-tour-of-india-2016'
    }
-
+</code>
 ###Response 
-
+<code>
 {
   "short_url": "http://python-short-url.herokuapp.com/s/8"
 }
