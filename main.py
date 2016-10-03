@@ -1,18 +1,20 @@
-from flask import Flask, request, redirect
-from flask import render_template
+from flask import Flask, request, Response, render_template, redirect, jsonify
 from math import floor
 from sqlite3 import OperationalError
-import string, sqlite3
-from urlparse import urlparse
+import string, sqlite3, base64, json, ast
 
+#Assuming urls.db is in your app root folder
+app = Flask(__name__)
+app_name = 'url-short'
+from urlparse import urlparse
 host = 'http://localhost:5000/'
 
 
 def table_check():
     create_table = """
         CREATE TABLE WEB_URL(
-        ID INT PRIMARY KEY     AUTOINCREMENT,
-        URL  TEXT    NOT NULL
+        ID INT PRIMARY KEY AUTOINCREMENT,
+        URL TEXT NOT NULL
         );
         """
     with sqlite3.connect('urls.db') as conn:
@@ -43,15 +45,11 @@ def toBase10(num, b = 62):
         res = b * res + base.find(num[i])
     return res
 
-#Assuming urls.db is in your app root folder
-app = Flask(__name__)
-app_name = 'ur'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         original_url = request.form.get('url')
-        print "======================================="
         if urlparse(original_url).scheme == '':
             original_url = 'http://' + original_url
         with sqlite3.connect('urls.db') as conn:
@@ -62,17 +60,13 @@ def home():
                 """%(original_url)
             result_cursor = cursor.execute(insert_row)
             encoded_string = toBase62(result_cursor.lastrowid)
-        return render_template('home.html',short_url= host+"?short_url/short_url"+ encoded_string)
+        return render_template('home.html',short_url= host+"s/"+ encoded_string)
     return render_template('home.html')
 
-
-
-@app.route('/?short_url/short_url/<short_url>')
+@app.route('/s/<short_url>')
 def redirect_short_url(short_url):
     decoded_string = toBase10(short_url)
-    print short_url
-    print "==============="
-    # redirect_url = 'http://localhost:5000'
+    redirect_url = 'http://localhost:5000'
     with sqlite3.connect('urls.db') as conn:
         cursor = conn.cursor()
         select_row = """
@@ -82,12 +76,28 @@ def redirect_short_url(short_url):
         result_cursor = cursor.execute(select_row)
         try:
             redirect_url = result_cursor.fetchone()[0]
-            print result_cursor.fetchone()
-            print "===================="
         except Exception as e:
             print e
     return redirect(redirect_url)
-
+#API for third party call
+@app.route('/v1/url/short', methods=['GET', 'POST'])
+def url_short():
+    if request.method == 'POST':
+        data_post = ast.literal_eval(request.data)
+        if 'url' in data_post:
+            original_url = data_post['url']
+        if urlparse(original_url).scheme == '':
+            original_url = 'http://' + original_url
+        with sqlite3.connect('urls.db') as conn:
+            cursor = conn.cursor()
+            insert_row = """
+                INSERT INTO WEB_URL (URL)
+                     VALUES ('%s')
+                 """%(original_url)
+            result_cursor = cursor.execute(insert_row)
+            encoded_string = toBase62(result_cursor.lastrowid)
+        short_url= host+"s/"+ encoded_string
+        return jsonify({'short_url':short_url})
 
 if __name__ == '__main__':
     # This code checks whether database table is created or not
