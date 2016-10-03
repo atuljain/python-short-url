@@ -7,7 +7,7 @@ import string, sqlite3, base64, json, ast
 app = Flask(__name__)
 app_name = 'url-short'
 from urlparse import urlparse
-host = 'http://python-short-url.herokuapp.com'
+host = 'http://python-short-url.herokuapp.com/'
 # host = 'http://localhost:5000/'
 
 
