@@ -7,7 +7,8 @@ import string, sqlite3, base64, json, ast
 app = Flask(__name__)
 app_name = 'url-short'
 from urlparse import urlparse
-host = 'http://localhost:5000/'
+host = 'http://python-short-url.herokuapp.com'
+# host = 'http://localhost:5000/'
 
 
 def table_check():
@@ -66,7 +67,8 @@ def home():
 @app.route('/s/<short_url>')
 def redirect_short_url(short_url):
     decoded_string = toBase10(short_url)
-    redirect_url = 'http://localhost:5000'
+    redirect_url = 'http://python-short-url.herokuapp.com'
+    # redirect_url = 'http://localhost:5000'
     with sqlite3.connect('urls.db') as conn:
         cursor = conn.cursor()
         select_row = """
