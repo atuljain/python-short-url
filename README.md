@@ -1,5 +1,4 @@
-Demo Link
-
+<a href='https://python-short-url.herokuapp.com/'>Demo</a>
 ### python-short-url
 
 <code>pip install flask</code>
@@ -13,7 +12,7 @@ CREATE TABLE WEB_URL(ID INT PRIMARY KEY   AUTOINCREMENT,  URL  TEXT    NOT NULL 
 <code>python main.py</code>
 
 Sample Post request to Get your short URL
-
+<code>
 Method == 'POST'
 Heaader = {
    'Content-Type':'application/json'
@@ -29,7 +28,7 @@ Response
 {
   "short_url": "http://python-short-url.herokuapp.com/s/8"
 }
-
+</code>
 
 Base 64
 refernce url http://tools.ietf.org/html/rfc3548.html
