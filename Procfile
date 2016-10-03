@@ -1,1 +1,1 @@
-web: python main.py --noreload
+web: gunicorn main:app --log-file -
