@@ -11,7 +11,8 @@ CREATE TABLE WEB_URL(ID INT PRIMARY KEY   AUTOINCREMENT,  URL  TEXT    NOT NULL 
 
 <code>python main.py</code>
 
-Sample Post request to Get your short URL
+###Sample Post request to Get your short URL
+
 <code>
 Method == 'POST'
 Heaader = {
@@ -23,7 +24,7 @@ data = {
       'url':'http://www.cricbuzz.com/live-cricket-scores/16823/ind-vs-nz-2nd-test-new-zealand-tour-of-india-2016'
    }
 
-Response 
+###Response 
 
 {
   "short_url": "http://python-short-url.herokuapp.com/s/8"
