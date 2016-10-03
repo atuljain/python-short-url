@@ -13,28 +13,31 @@ CREATE TABLE WEB_URL(ID INT PRIMARY KEY   AUTOINCREMENT,  URL  TEXT    NOT NULL 
 
 ###Sample Post request to Get your short URL
 
-<code>
+<pre>
 Method == 'POST'
-</code>
-<code>
+</pre>
+
+<pre>
 Heaader = {
    'Content-Type':'application/json'
 }
-</code>
-<code>
+</pre>
+
+<pre>
 url = 'https://python-short-url.herokuapp.com/v1/url/short'
-</code>
-<code>
+</pre>
+
+<pre>
 data = {
       'url':'http://www.cricbuzz.com/live-cricket-scores/16823/ind-vs-nz-2nd-test-new-zealand-tour-of-india-2016'
    }
-</code>
+</pre>
 ###Response 
-<code>
+<pre>
 {
   "short_url": "http://python-short-url.herokuapp.com/s/8"
 }
-</code>
+</pre>
 
 Base 64
 refernce url http://tools.ietf.org/html/rfc3548.html
